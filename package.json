@@ -4,7 +4,9 @@
   "description": "",
   "main": "script.js",
   "scripts": {
-    "test": "jest --coverage"
+    "test": "jest --coverage",
+    "test:unit": "jest \\.unit\\. --coverage",
+    "test:int": "jest \\.int\\. --coverage"
   },
   "repository": {
     "type": "git",
@@ -20,5 +22,8 @@
   "devDependencies": {
     "@types/jest": "^27.4.1",
     "jest": "^27.5.1"
+  },
+  "dependencies": {
+    "fs-extra": "^10.0.1"
   }
 }
