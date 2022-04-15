@@ -6,7 +6,7 @@ async function main() {
     const accountName = await CommandLine.ask('Which account would you like to access?')
     const account = await Account.find(accountName)
     if (account == null) account = await promptCreateAccount(accountName)
-    //TODO: returns error after account creation
+    //TODO: returns error after account creation, jumps to catch
     if (account != null) await promptTask(account)
   } catch (e) {
     CommandLine.print('ERROR: Please try again')
