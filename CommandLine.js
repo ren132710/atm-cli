@@ -19,18 +19,3 @@ module.exports = class CommandLine {
     console.log(text)
   }
 }
-
-/*
-const Account = require('./Account')
-const readline = require('readline')
-
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout,
-})
-
-rl.question('Which account would you like to access? ', (answer) => {
-  console.log(`Accessing account: ${answer}`)
-  rl.close()
-})
-*/
