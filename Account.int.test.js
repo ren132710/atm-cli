@@ -43,6 +43,17 @@ describe('Account Integration Tests', () => {
     expect(fs.readFileSync(account.filePath).toString()).toBe('75')
   })
 
+  test('should prevent withdraw when insufficient funds', async () => {
+    const name = 'White_Withdraw_Insufficient'
+    const account = await Account.create(name)
+    const startingBalance = 25
+    const withdrawAmount = 100
+    await account.deposit(startingBalance)
+
+    expect(account.withdraw(withdrawAmount)).rejects.toThrow()
+    expect(account.balance).toBe(startingBalance)
+  })
+
   test('should find an existing account', async () => {
     const name = 'Flores_Find'
     const balance = 25
