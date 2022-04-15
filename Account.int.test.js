@@ -2,7 +2,7 @@ const Account = require('./Account')
 const fsExtra = require('fs-extra')
 const fs = require('fs')
 
-describe('Account tests', () => {
+describe('Account Integration Tests', () => {
   afterEach(() => {
     fsExtra.emptyDirSync('accounts')
   })
