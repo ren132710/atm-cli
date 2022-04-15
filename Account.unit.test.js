@@ -79,6 +79,5 @@ describe('Account Unit Tests', () => {
     //then
     expect(spy).toHaveBeenCalled
     expect(account).toBeUndefined()
-    spy.mockRestore()
   })
 })
