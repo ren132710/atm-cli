@@ -1,8 +1,5 @@
 const fs = require('fs')
 
-//https://nodejs.org/docs/latest/api/fs.html#fs_fs_readfile_path_options_callback
-//If no encoding is specified, then the raw buffer is returned.
-
 module.exports = class FileSystem {
   static read(path) {
     return new Promise((resolve, reject) => {
