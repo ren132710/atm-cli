@@ -28,17 +28,13 @@ module.exports = class Account {
   }
 
   async deposit(amount) {
+    await FileSystem.write(this.filePath, this.#balance + amount)
     this.#balance = this.#balance + amount
-    await FileSystem.write(this.filePath, this.#balance)
   }
 
-  withdraw(amount) {
-    try {
-      // if (this.balance < amount) throw new Error('Insufficient funds')
-      if (this.balance < amount) throw 'Insufficient funds'
-      this.#balance = this.#balance - amount
-    } catch (err) {
-      console.log(err)
-    }
+  async withdraw(amount) {
+    if (this.balance < amount) throw new Error()
+    await FileSystem.write(this.filePath, this.#balance - amount)
+    this.#balance = this.#balance - amount
   }
 }

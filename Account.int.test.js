@@ -12,8 +12,8 @@ describe('Account tests', () => {
     const account = await Account.create(name)
     expect(account.name).toBe(name)
     expect(account.balance).toBe(0)
+
     //ensure account file exists and balance is saved to file
-    console.log(fs.readFileSync(account.filePath).toString())
     expect(fs.readFileSync(account.filePath).toString()).toBe('0')
   })
 
@@ -34,15 +34,14 @@ describe('Account tests', () => {
     expect(fs.readFileSync(account.filePath).toString()).toBe('175')
   })
 
-  test *
-    ('should successfully withdraw from an existing account',
-    async () => {
-      const name = 'James_Withdraw'
-      const account = await Account.create(name)
-      account.deposit(100)
-      account.withdraw(25)
-      expect(account.balance).toBe(85)
-    })
+  test('should successfully withdraw from an existing account', async () => {
+    const name = 'James_Withdraw'
+    const account = await Account.create(name)
+    await account.deposit(100)
+    await account.withdraw(25)
+    expect(account.balance).toBe(75)
+    expect(fs.readFileSync(account.filePath).toString()).toBe('75')
+  })
 })
 
 /*
