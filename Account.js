@@ -33,6 +33,12 @@ module.exports = class Account {
   }
 
   withdraw(amount) {
-    this.#balance = this.#balance - amount
+    try {
+      // if (this.balance < amount) throw new Error('Insufficient funds')
+      if (this.balance < amount) throw 'Insufficient funds'
+      this.#balance = this.#balance - amount
+    } catch (err) {
+      console.log(err)
+    }
   }
 }

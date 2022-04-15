@@ -20,31 +20,28 @@ describe('Account tests', () => {
   test('should successfully deposit into an existing account', async () => {
     const name = 'Jones_Deposit'
     const account = await Account.create(name)
-    account.deposit(100)
+
+    await account.deposit(100)
     expect(account.balance).toBe(100)
-    account.deposit(50)
+    expect(fs.readFileSync(account.filePath).toString()).toBe('100')
+
+    await account.deposit(50)
     expect(account.balance).toBe(150)
-    account.deposit(25)
+    expect(fs.readFileSync(account.filePath).toString()).toBe('150')
+
+    await account.deposit(25)
     expect(account.balance).toBe(175)
-    console.log(account.filePath)
-    const result = fs.readFileSync(account.filePath)
-    console.log('result: ', result)
-    //getting:     result:  <Buffer >
-    const result2 = fs.readFileSync(account.filePath).toString()
-    console.log('result: ', result2)
-    //getting empty string
-    //TODO: Expected: '175', Received: ''
     expect(fs.readFileSync(account.filePath).toString()).toBe('175')
   })
 
   test *
     ('should successfully withdraw from an existing account',
-    () => {
-      const name = 'James'
-      const account = Account.create(name)
+    async () => {
+      const name = 'James_Withdraw'
+      const account = await Account.create(name)
       account.deposit(100)
       account.withdraw(25)
-      expect(account.balance).toBe(75)
+      expect(account.balance).toBe(85)
     })
 })
 
