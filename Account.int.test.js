@@ -10,10 +10,9 @@ describe('Account Integration Tests', () => {
   test('should successfully create a new account with balance 0', async () => {
     const name = 'Clark_Create'
     const account = await Account.create(name)
+
     expect(account.name).toBe(name)
     expect(account.balance).toBe(0)
-
-    //ensure account file exists and balance is saved to file
     expect(fs.readFileSync(account.filePath).toString()).toBe('0')
   })
 
@@ -39,6 +38,7 @@ describe('Account Integration Tests', () => {
     const account = await Account.create(name)
     await account.deposit(100)
     await account.withdraw(25)
+
     expect(account.balance).toBe(75)
     expect(fs.readFileSync(account.filePath).toString()).toBe('75')
   })
@@ -48,6 +48,7 @@ describe('Account Integration Tests', () => {
     const balance = 25
     fs.writeFileSync(`accounts/${name}.txt`, balance.toString())
     const foundAccount = await Account.find(name)
+
     expect(foundAccount.name).toBe(name)
     expect(foundAccount.balance).toBe(balance)
     expect(fs.readFileSync(foundAccount.filePath).toString()).toBe('25')
@@ -56,6 +57,7 @@ describe('Account Integration Tests', () => {
   test('should return undefined if account not found', async () => {
     const name = 'Flores_Undefined'
     const account = await Account.find(name)
+
     expect(account).toBeUndefined()
   })
 })
